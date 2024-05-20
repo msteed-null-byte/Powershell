@@ -1,3 +1,29 @@
+<#
+.SYNOPSIS
+    Updates the department attribute of users in Active Directory using information from a CSV file.
+
+.DESCRIPTION
+    This script imports user information from a CSV file, retrieves each user from Active Directory,
+    and updates their department attribute to a new value specified in the script.
+
+.NOTES
+    Author: Michael Steed
+    Date: 2020-01-07
+    Version: 1.0
+    Last Updated: 2024-05-20
+
+    This script provides a convenient way to update user attributes in Active Directory using CSV data.
+
+.PARAMETER CSVFile
+    Specifies the path to the CSV file containing user information.
+
+.PARAMETER NewDepartment
+    Specifies the new department name to be assigned to the users.
+
+.LINK
+    https://example.com/documentation
+#>
+
 # Import the Active Directory module
 Import-Module ActiveDirectory
 

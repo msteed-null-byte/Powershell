@@ -1,3 +1,24 @@
+<#
+.SYNOPSIS
+    Adds Active Directory and Office 365 groups of a source user to a target user.
+
+.DESCRIPTION
+    This script contains functions to add Active Directory and Office 365 groups of a source user
+    to a specified target user. The "Add-ADGroups" function adds AD security groups, while the
+    "Add-O365Groups" function adds Office 365 groups.
+
+.NOTES
+    Author: Michael Steed
+    Date: 2020-01-7
+    Version: 1.0
+    Last Updated: 2024-05-20
+
+    This script provides a convenient way to replicate group memberships from one user to another in Active Directory and Office 365.
+
+.LINK
+    https://example.com/documentation
+#>
+
 # Function to add AD groups
 function Add-ADGroups {
     param (

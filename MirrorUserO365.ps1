@@ -1,3 +1,27 @@
+Here's the code with a credit block added:
+
+powershell
+
+<#
+.SYNOPSIS
+    Replicates Office 365 group memberships from a source user to a target user.
+
+.DESCRIPTION
+    This script connects to Azure AD, retrieves the Office 365 group memberships of a source user,
+    and adds the target user to each of those groups.
+
+.NOTES
+    Author: Michael Steed
+    Date: 2020-01-07
+    Version: 1.0
+    Last Updated: 2024-05-20
+
+    This script provides a convenient way to replicate group memberships from one user to another in Office 365.
+
+.LINK
+    https://example.com/documentation
+#>
+
 # Install the AzureAD module if you haven't already
 # Install-Module AzureAD
 

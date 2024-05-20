@@ -1,7 +1,9 @@
+param (
+    [string[]]$servers = @('server1.example.com', 'server2.example.com')
+)
+
 $LockOutID = 4740
 $Results = @()
-
-$servers = @('wm01-addc-i01.accuratebackground.int', 'wm01-addc-i02.accuratebackground.int')
 
 foreach ($server in $servers) {
     $events = Get-WinEvent -ComputerName $server -FilterHashtable @{
@@ -15,8 +17,8 @@ foreach ($server in $servers) {
             CallerComputer = $event.Properties[1].Value
             TimeStamp = $event.TimeCreated
         }
-        $Results += New-object psobject -Property $Properties
+        $Results += New-Object psobject -Property $properties
     }
 }
 
-$Results | Select-Object UserName, CallerComputer, TimeStamp | Export-csv -Path .\lockoutreport.csv -NoTypeInformation
+$Results | Select-Object UserName, CallerComputer, TimeStamp | Export-Csv -Path .\lockoutreport.csv -NoTypeInformation

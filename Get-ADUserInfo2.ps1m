@@ -1,0 +1,67 @@
+function Get-ADUserInformation {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $true, Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Username,
+
+        [Switch]$Unlock,
+        [Switch]$Disable,
+        [Switch]$Enable,
+
+        [String]$AdServer,
+    )
+
+    $properties = @(
+        'Name',
+        'SamAccountName',
+        'PasswordExpired',
+        'PasswordLastSet',
+        'LockedOut',
+        'Description',
+        @{Name = 'OU'; Expression = {$_.DistinguishedName -replace '^.+?(?<!\\),',''}}
+    )
+
+    if ($Unlock) {
+        $user = Get-ADUser -Server $AdServer $Username
+        if ($user) {
+            if ($user.LockedOut) {
+                $user | Unlock-ADAccount
+                Write-Output "User '$Username' has been unlocked."
+            } else {
+                Write-Output "User '$Username' is already unlocked."
+            }
+        } else {
+            Write-Output "User '$Username' not found."
+        }
+    } elseif ($Disable) {
+        $user = Get-ADUser -Server $AdServer $Username
+        if ($user) {
+            if (-not $user.Enabled) {
+                Write-Output "User '$Username' is already disabled."
+            } else {
+                $user | Disable-ADAccount
+                Write-Output "User '$Username' has been disabled."
+            }
+        } else {
+            Write-Output "User '$Username' not found."
+        }
+    } elseif ($Enable) {
+        $user = Get-ADUser -Server $AdServer $Username
+        if ($user) {
+            if ($user.Enabled) {
+                Write-Output "User '$Username' is already enabled."
+            } else {
+                $user | Enable-ADAccount
+                Write-Output "User '$Username' has been enabled."
+            }
+        } else {
+            Write-Output "User '$Username' not found."
+        }
+    } else {
+        Get-ADUser -Server $AdServer $Username -Properties * |
+            Select-Object -Property $properties
+    }
+}
+
+Export-ModuleMember -Function 'Get-ADUserInformation'

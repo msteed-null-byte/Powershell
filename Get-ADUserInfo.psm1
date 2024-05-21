@@ -39,10 +39,7 @@
 
     Disables the user account for "jane.smith" on the "example.com" server.
 
-.LINK
-    https://example.com/documentation
 #>
-
 
 function Get-ADUserInfo {
     [CmdletBinding()]

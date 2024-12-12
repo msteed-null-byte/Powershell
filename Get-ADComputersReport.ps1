@@ -8,6 +8,7 @@
 
 .NOTES
     Author: Michael Steed
+    Email: msteed@null-byte.xyz
     Date: 2020-01-07
     Version: 3.0
     Last Updated: 2024-12-12
